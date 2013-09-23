@@ -12,7 +12,7 @@ class TestBasicFlows(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        os.getcwd()
+        print os.getcwd()
         chromedriver = os.getcwd() + "/tools/chromedriver"
         os.environ["webdriver.chrome.driver"] = chromedriver
         cls.chromedriver = chromedriver
