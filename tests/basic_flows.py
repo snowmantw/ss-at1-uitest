@@ -25,6 +25,7 @@ class TestBasicFlows(unittest.TestCase):
               os.environ["webdriver.chrome.bin"] = '/usr/lib/chromium-browser/chromium-browser'
               return cwd + "/tools/chromedriver-linux64"
             elif which_system == 'Linux' and not is_64bits:
+              os.environ["webdriver.chrome.bin"] = '/usr/lib/chromium-browser/chromium-browser'
               return cwd + "/tools/chromedriver-linux32"
             else:
               raise "Not in a capatible platform: %s " % platform.systme()
