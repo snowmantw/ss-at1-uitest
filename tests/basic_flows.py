@@ -2,7 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import unittest
+import platform
 import os
+import sys
 
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -12,8 +14,21 @@ class TestBasicFlows(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
-        print os.getcwd()
-        chromedriver = os.getcwd() + "/tools/chromedriver"
+
+        def dispatch_driver_path():
+            cwd = os.getcwd()
+            is_64bits = sys.maxsize > 2**32
+            which_system = platform.system()
+            if which_system == 'Darwin':
+              return cwd + "/tools/chromedriver-mac"
+            elif which_system == 'Linux' and is_64bits:
+              return cwd + "/tools/chromedriver-linux64"
+            elif which_system == 'Linux' and not is_64bits:
+              return cwd + "/tools/chromedriver-linux32"
+            else:
+              raise "Not in a capatible platform: %s " % platform.systme()
+
+        chromedriver = dispatch_driver_path()
         os.environ["webdriver.chrome.driver"] = chromedriver
         print os.environ["webdriver.chrome.driver"]
         cls.chromedriver = chromedriver
