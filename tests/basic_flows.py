@@ -22,6 +22,7 @@ class TestBasicFlows(unittest.TestCase):
             if which_system == 'Darwin':
               return cwd + "/tools/chromedriver-mac"
             elif which_system == 'Linux' and is_64bits:
+              os.environ["webdriver.chrome.bin"] = '/usr/bin/google-chrome'
               return cwd + "/tools/chromedriver-linux64"
             elif which_system == 'Linux' and not is_64bits:
               return cwd + "/tools/chromedriver-linux32"
