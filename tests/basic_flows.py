@@ -9,6 +9,7 @@ import sys
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 class TestBasicFlows(unittest.TestCase):
 
@@ -37,7 +38,9 @@ class TestBasicFlows(unittest.TestCase):
         cls.chromedriver = chromedriver
 
     def setUp(self):
-        self.driver = webdriver.Chrome(TestBasicFlows.chromedriver)
+        desired_capabilities = DesiredCapabilities.CHROME
+        desired_capabilities["chrome.binary"] = "/usr/lib/chromium-browser/chromium-browser"
+        self.driver = webdriver.Chrome(TestBasicFlows.chromedriver, desired_capabilities=desired_capabilities)
         self.siteurl = "http://wa.nccu.edu.tw/QryTor"
         self.driver.get(self.siteurl)
 
