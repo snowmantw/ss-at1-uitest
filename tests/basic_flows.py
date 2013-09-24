@@ -18,6 +18,7 @@ class TestBasicFlows(unittest.TestCase):
         def dispatch_driver_path():
             cwd = os.getcwd()
             is_64bits = sys.maxsize > 2**32
+            print "is_64bit: %s" % is_64bits
             which_system = platform.system()
             if which_system == 'Darwin':
               return cwd + "/tools/chromedriver-mac"
@@ -28,7 +29,7 @@ class TestBasicFlows(unittest.TestCase):
               os.environ["webdriver.chrome.bin"] = '/usr/lib/chromium-browser/chromium-browser'
               return cwd + "/tools/chromedriver-linux32"
             else:
-              raise "Not in a capatible platform: %s " % platform.systme()
+              raise "Not in a capatible platform: %s " % platform.system()
 
         chromedriver = dispatch_driver_path()
         os.environ["webdriver.chrome.driver"] = chromedriver
