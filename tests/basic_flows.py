@@ -40,6 +40,7 @@ class TestBasicFlows(unittest.TestCase):
     def setUp(self):
         desired_capabilities = DesiredCapabilities.CHROME
         desired_capabilities["chrome.binary"] = "/usr/lib/chromium-browser/chromium-browser"
+        desired_capabilities["chrome.switches"] = ["--no-sandbox"]
         self.driver = webdriver.Chrome(TestBasicFlows.chromedriver, desired_capabilities=desired_capabilities)
         self.siteurl = "http://wa.nccu.edu.tw/QryTor"
         self.driver.get(self.siteurl)
